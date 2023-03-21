@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:todo_app/screens/HomePage.dart';
 
-void main(){
-  runApp(MyToDoApp());
+void main()async{
+  await Hive.initFlutter();
+  var box=await Hive.openBox('mybox');
+  runApp(const MyToDoApp());
 }
 class MyToDoApp extends StatelessWidget {
   const MyToDoApp({Key? key}) : super(key: key);
@@ -11,7 +15,7 @@ class MyToDoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
